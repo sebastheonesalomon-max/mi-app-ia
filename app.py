@@ -2,6 +2,7 @@ from flask import Flask, request, render_template
 from openai import OpenAI
 
 app = Flask(__name__)
+server = app
 
 
 import os
