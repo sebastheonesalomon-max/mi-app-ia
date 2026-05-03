@@ -1,16 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Generador de Contenido IA</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: rgba(0,0,0,0.3);
+            padding: 30px;
+            border-radius: 15px;
+            width: 500px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            margin-top: 10px;
+            resize: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 8px;
+            background: #00c9a7;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #00a98b;
+        }
+
+        .respuesta {
+            margin-top: 20px;
+            background: white;
+            color: black;
+            padding: 15px;
+            border-radius: 10px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
 <body>
 
 <div class="container">
-    <h2>🚀 Generador de contenido</h2>
+    <h1>🚀 Generador de Contenido</h1>
 
     <form method="POST">
-        <textarea name="content" placeholder="Describe tu negocio..."></textarea>
+        <textarea name="content" rows="4" placeholder="Describe tu negocio..."></textarea>
         <button type="submit">Generar</button>
     </form>
 
-    <div class="resultado">
+    {% if response %}
+    <div class="respuesta">
         {{ response }}
     </div>
+    {% endif %}
 </div>
 
 </body>
+</html>
