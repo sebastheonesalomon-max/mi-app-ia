@@ -29,11 +29,12 @@
 
         textarea {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             border-radius: 8px;
             border: none;
             margin-top: 10px;
             resize: none;
+            font-size: 14px;
         }
 
         button {
@@ -58,7 +59,20 @@
             color: black;
             padding: 15px;
             border-radius: 10px;
+        }
+
+        pre {
             white-space: pre-wrap;
+            font-family: Arial, sans-serif;
+        }
+
+        .copiar-btn {
+            margin-top: 10px;
+            background: #667eea;
+        }
+
+        .copiar-btn:hover {
+            background: #556cd6;
         }
     </style>
 </head>
@@ -74,10 +88,19 @@
 
     {% if response %}
     <div class="respuesta">
-        {{ response }}
+        <pre>{{ response }}</pre>
+        <button class="copiar-btn" onclick="copiarTexto()">Copiar texto</button>
     </div>
     {% endif %}
 </div>
+
+<script>
+function copiarTexto() {
+    const texto = document.querySelector(".respuesta pre").innerText;
+    navigator.clipboard.writeText(texto);
+    alert("Texto copiado");
+}
+</script>
 
 </body>
 </html>
