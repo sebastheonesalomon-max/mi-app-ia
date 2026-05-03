@@ -2,10 +2,7 @@ from flask import Flask, request, render_template
 from openai import OpenAI
 
 app = Flask(__name__)
-server = app
 
-
-import os
 client = OpenAI()
 
 @app.route("/", methods=["GET", "POST"])
@@ -20,11 +17,24 @@ def home():
             messages=[
                 {
                     "role": "system",
-                    "content": "Eres un experto en marketing digital que ayuda a negocios a crear contenido para redes sociales que atrae clientes, genera interés y convierte en ventas. Responde con ideas claras, gancho (hook), estructura del contenido y llamada a la acción."
+                    "content": "Eres un experto en marketing digital especializado en redes sociales. Creas contenido atractivo, claro y enfocado en generar clientes reales para negocios. Respondes con estructuras claras, prácticas y listas para usar."
                 },
                 {
                     "role": "user",
-                    "content": user_input + " Dame: 1) Idea de contenido 2) Hook 3) Guión 4) CTA para vender"
+                    "content": f"""
+                    Tengo este negocio: {user_input}
+
+                    Crea un calendario de contenido para 7 días (lunes a domingo).
+
+                    Para cada día incluye:
+                    - Tipo de contenido (reel, historia, post, etc.)
+                    - Idea de contenido
+                    - Hook (gancho)
+                    - Guión corto
+                    - CTA para vender
+
+                    Hazlo claro, ordenado y separado por días.
+                    """
                 }
             ]
         )
@@ -33,4 +43,4 @@ def home():
 
     return render_template("index.html", response=response)
 
-
+# NO usar app.run()
