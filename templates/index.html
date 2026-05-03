@@ -1,104 +1,134 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Generador de Contenido IA</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generador de Contenido IA</title>
 
-        .container {
-            background: rgba(0,0,0,0.3);
-            padding: 30px;
-            border-radius: 15px;
-            width: 500px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
 
-        h1 {
-            text-align: center;
-        }
+    .container {
+      background: rgba(0,0,0,0.35);
+      padding: 30px;
+      border-radius: 16px;
+      width: 520px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      text-align: center;
+    }
 
-        textarea {
-            width: 100%;
-            padding: 12px;
-            border-radius: 8px;
-            border: none;
-            margin-top: 10px;
-            resize: none;
-            font-size: 14px;
-        }
+    h1 {
+      margin-bottom: 10px;
+    }
 
-        button {
-            width: 100%;
-            padding: 12px;
-            margin-top: 10px;
-            border: none;
-            border-radius: 8px;
-            background: #00c9a7;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
+    .sub {
+      font-size: 14px;
+      opacity: 0.8;
+      margin-bottom: 20px;
+    }
 
-        button:hover {
-            background: #00a98b;
-        }
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      resize: none;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
 
-        .respuesta {
-            margin-top: 20px;
-            background: white;
-            color: black;
-            padding: 15px;
-            border-radius: 10px;
-        }
+    button {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      background: #00c9a7;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
 
-        pre {
-            white-space: pre-wrap;
-            font-family: Arial, sans-serif;
-        }
+    button:hover {
+      background: #00a98b;
+    }
 
-        .copiar-btn {
-            margin-top: 10px;
-            background: #667eea;
-        }
+    .respuesta {
+      margin-top: 20px;
+      background: white;
+      color: black;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: left;
+    }
 
-        .copiar-btn:hover {
-            background: #556cd6;
-        }
-    </style>
+    pre {
+      white-space: pre-wrap;
+      font-family: Arial, sans-serif;
+    }
+
+    .copiar-btn {
+      margin-top: 10px;
+      background: #667eea;
+    }
+
+    .copiar-btn:hover {
+      background: #556cd6;
+    }
+
+    .footer {
+      margin-top: 20px;
+      font-size: 12px;
+      opacity: 0.6;
+    }
+  </style>
 </head>
+
 <body>
 
 <div class="container">
-    <h1>🚀 Generador de Contenido</h1>
+  <h1>🚀 Generador de Contenido</h1>
+  <div class="sub">Crea ideas listas para Instagram en segundos</div>
 
-    <form method="POST">
-        <textarea name="content" rows="4" placeholder="Describe tu negocio..."></textarea>
-        <button type="submit">Generar</button>
-    </form>
+  <form method="POST">
+    <textarea name="content" rows="4" placeholder="Ej: Barbería moderna en Ecuador con estilo premium..."></textarea>
+    <button type="submit" id="btn">Generar contenido</button>
+  </form>
 
-    {% if response %}
-    <div class="respuesta">
-        <pre>{{ response }}</pre>
-        <button class="copiar-btn" onclick="copiarTexto()">Copiar texto</button>
-    </div>
-    {% endif %}
+  {% if response %}
+  <div class="respuesta">
+    <pre>{{ response }}</pre>
+    <button class="copiar-btn" onclick="copiarTexto()">Copiar texto</button>
+  </div>
+  {% endif %}
+
+  <div class="footer">
+    Demo IA • Hecho para negocios locales
+  </div>
 </div>
 
 <script>
+const form = document.querySelector("form");
+const btn = document.getElementById("btn");
+
+form.addEventListener("submit", () => {
+  btn.innerText = "Generando...";
+  btn.disabled = true;
+});
+
 function copiarTexto() {
-    const texto = document.querySelector(".respuesta pre").innerText;
-    navigator.clipboard.writeText(texto);
-    alert("Texto copiado");
+  const texto = document.querySelector(".respuesta pre").innerText;
+  navigator.clipboard.writeText(texto);
+  alert("Texto copiado");
 }
 </script>
 
