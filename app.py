@@ -10,7 +10,7 @@ def home():
     response = ""
 
     if request.method == "POST":
-        user_input = request.form["content"]
+        user_input = request.form["prompt"]
 
         completion = client.chat.completions.create(
             model="gpt-4o-mini",
