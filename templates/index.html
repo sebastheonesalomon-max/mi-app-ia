@@ -5,11 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Generador de Contenido IA</title>
 
-    <!-- Fuente premium -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <style>
-
         *{
             margin:0;
             padding:0;
@@ -18,7 +16,7 @@
 
         body{
             font-family:'Poppins',sans-serif;
-            background:linear-gradient(135deg,#0f172a,#1e293b);
+            background: linear-gradient(135deg,#0f172a,#1e293b);
             min-height:100vh;
             display:flex;
             justify-content:center;
@@ -29,38 +27,53 @@
 
         .contenedor{
             width:100%;
-            max-width:650px;
-            background:#111827;
-            padding:35px;
-            border-radius:24px;
-            box-shadow:0 10px 40px rgba(0,0,0,0.4);
+            max-width:700px;
+        }
+
+        .badge{
+            display:inline-block;
+            padding:10px 20px;
+            border-radius:999px;
+            background:linear-gradient(90deg,#7c3aed,#2563eb);
+            font-size:14px;
+            font-weight:600;
+            margin-bottom:20px;
+            box-shadow:0 0 20px rgba(124,58,237,0.4);
         }
 
         h1{
+            font-size:52px;
             text-align:center;
-            font-size:34px;
             margin-bottom:10px;
+            font-weight:700;
         }
 
-        .subtitulo{
+        .sub{
             text-align:center;
             color:#cbd5e1;
-            margin-bottom:30px;
-            font-size:16px;
+            margin-bottom:35px;
+            font-size:18px;
+        }
+
+        form{
+            display:flex;
+            flex-direction:column;
+            gap:20px;
         }
 
         textarea{
             width:100%;
-            height:120px;
+            min-height:180px;
             border:none;
-            border-radius:16px;
-            background:#1f2937;
-            color:white;
-            padding:18px;
-            font-size:16px;
             outline:none;
+            border-radius:24px;
+            padding:25px;
+            font-size:18px;
             resize:none;
-            margin-bottom:20px;
+            background:rgba(255,255,255,0.08);
+            backdrop-filter:blur(10px);
+            color:white;
+            box-shadow:0 10px 30px rgba(0,0,0,0.3);
         }
 
         textarea::placeholder{
@@ -68,42 +81,65 @@
         }
 
         button{
-            width:100%;
-            padding:18px;
             border:none;
-            border-radius:16px;
-            background:linear-gradient(90deg,#7c3aed,#06b6d4);
-            color:white;
-            font-size:18px;
+            padding:20px;
+            border-radius:20px;
+            font-size:22px;
             font-weight:700;
             cursor:pointer;
+            color:white;
+            background:linear-gradient(90deg,#8b5cf6,#06b6d4);
             transition:0.3s;
+            box-shadow:0 10px 30px rgba(139,92,246,0.4);
         }
 
         button:hover{
-            transform:scale(1.02);
+            transform:translateY(-3px);
             opacity:0.95;
         }
 
         .resultado{
             margin-top:30px;
-            background:#1f2937;
-            padding:25px;
-            border-radius:18px;
-            line-height:1.8;
-            color:#f8fafc;
-            white-space:pre-wrap;
-            font-size:15px;
+            background:rgba(255,255,255,0.08);
+            border-radius:24px;
+            padding:30px;
+            backdrop-filter:blur(10px);
+            box-shadow:0 10px 30px rgba(0,0,0,0.3);
         }
 
-        .badge{
-            background:#7c3aed;
-            width:fit-content;
-            padding:8px 14px;
-            border-radius:999px;
-            font-size:13px;
-            margin-bottom:18px;
-            font-weight:600;
+        .resultado h2{
+            margin-bottom:20px;
+            font-size:28px;
+        }
+
+        .respuesta{
+            white-space:pre-wrap;
+            line-height:1.8;
+            color:#e2e8f0;
+            font-size:16px;
+        }
+
+        .footer{
+            margin-top:25px;
+            text-align:center;
+            color:#94a3b8;
+            font-size:14px;
+        }
+
+        @media(max-width:768px){
+
+            h1{
+                font-size:36px;
+            }
+
+            textarea{
+                min-height:150px;
+                font-size:16px;
+            }
+
+            button{
+                font-size:18px;
+            }
         }
 
     </style>
@@ -111,31 +147,65 @@
 
 <body>
 
-    <div class="contenedor">
+<div class="contenedor">
 
-        <div class="badge">
-            🚀 IA para negocios
-        </div>
+    <div class="badge">
+        🚀 IA para negocios
+    </div>
 
-        <h1>Generador de Contenido</h1>
+    <h1>Generador de Contenido</h1>
 
-        <p class="subtitulo">
-            Crea ideas listas para Instagram en segundos con inteligencia artificial.
-        </p>
+    <p class="sub">
+        Crea ideas listas para Instagram en segundos con inteligencia artificial.
+    </p>
+
+    <form method="POST">
 
         <textarea 
-            placeholder="Ejemplo: Tengo una barbería premium en Guayaquil">
-        </textarea>
+            name="prompt"
+            placeholder="Ejemplo: Tengo una barbería premium en Guayaquil"
+            required
+        ></textarea>
 
-        <button>
+        <button id="btn" type="submit">
             Generar contenido
         </button>
 
-        <div class="resultado">
-Aquí aparecerá el contenido generado por la IA...
+    </form>
+
+    {% if respuesta %}
+
+    <div class="resultado">
+
+        <h2>✨ Resultado generado</h2>
+
+        <div class="respuesta">
+            {{ respuesta }}
         </div>
 
     </div>
+
+    {% endif %}
+
+    <div class="footer">
+        Demo IA • Hecho para negocios locales
+    </div>
+
+</div>
+
+<script>
+
+const form = document.querySelector("form");
+const btn = document.getElementById("btn");
+
+form.addEventListener("submit", () => {
+
+    btn.innerText = "Generando...";
+    btn.disabled = true;
+
+});
+
+</script>
 
 </body>
 </html>
