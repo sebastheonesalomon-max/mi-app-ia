@@ -1,136 +1,141 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Generador de Contenido IA</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Contenido IA</title>
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      margin: 0;
-    }
+    <!-- Fuente premium -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    .container {
-      background: rgba(0,0,0,0.35);
-      padding: 30px;
-      border-radius: 16px;
-      width: 520px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-      text-align: center;
-    }
+    <style>
 
-    h1 {
-      margin-bottom: 10px;
-    }
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
 
-    .sub {
-      font-size: 14px;
-      opacity: 0.8;
-      margin-bottom: 20px;
-    }
+        body{
+            font-family:'Poppins',sans-serif;
+            background:linear-gradient(135deg,#0f172a,#1e293b);
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            padding:20px;
+            color:white;
+        }
 
-    textarea {
-      width: 100%;
-      padding: 12px;
-      border-radius: 8px;
-      border: none;
-      resize: none;
-      font-size: 14px;
-      margin-bottom: 10px;
-    }
+        .contenedor{
+            width:100%;
+            max-width:650px;
+            background:#111827;
+            padding:35px;
+            border-radius:24px;
+            box-shadow:0 10px 40px rgba(0,0,0,0.4);
+        }
 
-    button {
-      width: 100%;
-      padding: 12px;
-      border-radius: 8px;
-      border: none;
-      background: #00c9a7;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-      transition: 0.2s;
-    }
+        h1{
+            text-align:center;
+            font-size:34px;
+            margin-bottom:10px;
+        }
 
-    button:hover {
-      background: #00a98b;
-    }
+        .subtitulo{
+            text-align:center;
+            color:#cbd5e1;
+            margin-bottom:30px;
+            font-size:16px;
+        }
 
-    .respuesta {
-      margin-top: 20px;
-      background: white;
-      color: black;
-      padding: 15px;
-      border-radius: 10px;
-      text-align: left;
-    }
+        textarea{
+            width:100%;
+            height:120px;
+            border:none;
+            border-radius:16px;
+            background:#1f2937;
+            color:white;
+            padding:18px;
+            font-size:16px;
+            outline:none;
+            resize:none;
+            margin-bottom:20px;
+        }
 
-    pre {
-      white-space: pre-wrap;
-      font-family: Arial, sans-serif;
-    }
+        textarea::placeholder{
+            color:#94a3b8;
+        }
 
-    .copiar-btn {
-      margin-top: 10px;
-      background: #667eea;
-    }
+        button{
+            width:100%;
+            padding:18px;
+            border:none;
+            border-radius:16px;
+            background:linear-gradient(90deg,#7c3aed,#06b6d4);
+            color:white;
+            font-size:18px;
+            font-weight:700;
+            cursor:pointer;
+            transition:0.3s;
+        }
 
-    .copiar-btn:hover {
-      background: #556cd6;
-    }
+        button:hover{
+            transform:scale(1.02);
+            opacity:0.95;
+        }
 
-    .footer {
-      margin-top: 20px;
-      font-size: 12px;
-      opacity: 0.6;
-    }
-  </style>
+        .resultado{
+            margin-top:30px;
+            background:#1f2937;
+            padding:25px;
+            border-radius:18px;
+            line-height:1.8;
+            color:#f8fafc;
+            white-space:pre-wrap;
+            font-size:15px;
+        }
+
+        .badge{
+            background:#7c3aed;
+            width:fit-content;
+            padding:8px 14px;
+            border-radius:999px;
+            font-size:13px;
+            margin-bottom:18px;
+            font-weight:600;
+        }
+
+    </style>
 </head>
 
 <body>
 
-<div class="container">
-  <h1>🚀 Generador de Contenido</h1>
-  <div class="sub">Crea ideas listas para Instagram en segundos</div>
+    <div class="contenedor">
 
-  <form method="POST">
-    <textarea name="content" rows="4" placeholder="Ej: Barbería moderna en Ecuador con estilo premium..."></textarea>
-    <button type="submit" id="btn">Generar contenido</button>
-  </form>
+        <div class="badge">
+            🚀 IA para negocios
+        </div>
 
-  {% if response %}
-  <div class="respuesta">
-    <pre>{{ response }}</pre>
-    <button class="copiar-btn" onclick="copiarTexto()">Copiar texto</button>
-  </div>
-  {% endif %}
+        <h1>Generador de Contenido</h1>
 
-  <div class="footer">
-    Demo IA • Hecho para negocios locales
-  </div>
-</div>
+        <p class="subtitulo">
+            Crea ideas listas para Instagram en segundos con inteligencia artificial.
+        </p>
 
-<script>
-const form = document.querySelector("form");
-const btn = document.getElementById("btn");
+        <textarea 
+            placeholder="Ejemplo: Tengo una barbería premium en Guayaquil">
+        </textarea>
 
-form.addEventListener("submit", () => {
-  btn.innerText = "Generando...";
-  btn.disabled = true;
-});
+        <button>
+            Generar contenido
+        </button>
 
-function copiarTexto() {
-  const texto = document.querySelector(".respuesta pre").innerText;
-  navigator.clipboard.writeText(texto);
-  alert("Texto copiado");
-}
-</script>
+        <div class="resultado">
+Aquí aparecerá el contenido generado por la IA...
+        </div>
+
+    </div>
 
 </body>
 </html>
