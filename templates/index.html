@@ -152,13 +152,28 @@
 
         </form>
 
-        {% if response %}
+       {% if response %}
 
-        <div class="resultado">
-{{ response }}
-        </div>
+<div class="resultado">
+    <span id="respuesta"></span>
+</div>
 
-        {% endif %}
+<script>
+  const text = `{{ response | safe }}`;
+  let i = 0;
+
+  function typeWriter() {
+    if (i < text.length) {
+      document.getElementById("respuesta").innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typeWriter, 15);
+    }
+  }
+
+  window.onload = typeWriter;
+</script>
+
+{% endif %}
 
         <div class="footer">
             Demo IA • Hecho para negocios locales
